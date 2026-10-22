@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portafolio de Paula Peguero: diseño, branding, ad tech e ilustración.">
+<title>Paula Peguero · Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Manrope:wght@400;500;600&display=swap">
+<style>
+/* Layout: big name, grid of project covers that open each project in place, then a compact CV band and contact */
+:root{
+  --bg:#F4F1EE; --surface:#FBF9F7; --ink:#2B2624; --muted:#786D67; --line:#E2DCD7;
+  --accent:#9C5A5A; --accent-ink:#FFFFFF; --scrim:rgba(43,38,36,.5);
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Manrope", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1A1716; --surface:#231F1D; --ink:#EDE7E3; --muted:#A89D97; --line:#362F2C;
+  --accent:#D49A97; --accent-ink:#1A1716; --scrim:rgba(0,0,0,.7); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1A1716; --surface:#231F1D; --ink:#EDE7E3; --muted:#A89D97; --line:#362F2C;
+  --accent:#D49A97; --accent-ink:#1A1716; --scrim:rgba(0,0,0,.7); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body.locked{overflow:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 64px;display:flex;flex-direction:column;gap:72px}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+header{display:flex;flex-direction:column;gap:20px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.lang button{font:inherit;font-size:13px;font-weight:600;letter-spacing:.06em;border:0;background:none;color:var(--muted);border-radius:999px;padding:4px 12px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+h1{font-size:clamp(52px,11vw,124px);line-height:.95;font-weight:300;letter-spacing:-.025em}
+h1 span{color:var(--accent)}
+.lede{font-size:clamp(17px,2vw,20px);max-width:42ch;margin:0;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;color:var(--muted)}
+.brands{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:20px;margin-top:12px}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{list-style:none;margin:0;padding:0;display:flex;width:max-content;animation:scroll 28s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track li{padding-right:clamp(32px,5vw,64px);white-space:nowrap}
+@keyframes scroll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.track{animation:none;flex-wrap:wrap;width:auto}.track li[aria-hidden]{display:none}}
+.brands li{font-family:var(--display);font-weight:400;font-size:clamp(20px,3vw,30px);letter-spacing:-.01em;color:var(--muted)}
+section{display:flex;flex-direction:column;gap:24px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px}
+h2{font-size:clamp(28px,4vw,40px);font-weight:400;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.proj{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-width:0}
+.cover{aspect-ratio:4/3;max-width:100%;width:100%;border-radius:2px;overflow:hidden;background:var(--surface);border:1px solid var(--line)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.proj:hover .cover img{transform:scale(1.035)}
+.proj:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
+.proj h3{font-size:20px;font-weight:400}
+.meta{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--muted)}
+.meta .go{color:var(--accent);font-weight:500}
+.cv{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
+.cv h3{font-size:22px;font-weight:400;margin-bottom:16px}
+.item{display:grid;grid-template-columns:96px 1fr;gap:12px;padding-block:12px;border-top:1px solid var(--line)}
+.item:last-child{border-bottom:1px solid var(--line)}
+.item .when{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.item b{display:block;font-weight:500}
+.item p{margin:2px 0 0;color:var(--muted);font-size:15px;min-width:0}
+.contact{background:var(--ink);color:var(--bg);border-radius:2px;padding:clamp(24px,5vw,48px);display:flex;flex-direction:column;gap:20px}
+.contact h2{font-size:clamp(34px,6vw,56px);font-weight:300}
+.contact .label{color:inherit;opacity:.7}
+.links{display:flex;flex-wrap:wrap;gap:12px}
+.links a{border:1px solid currentColor;border-radius:999px;padding:8px 18px;text-decoration:none;font-weight:500}
+.links a:hover{background:var(--bg);color:var(--ink)}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-size:18px}
+.mail code{font-family:var(--body);user-select:all}
+.mail button{font:inherit;font-size:14px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:6px 14px;cursor:pointer}
+
+/* project view */
+.viewer{position:fixed;inset:0;z-index:20;background:var(--scrim);display:flex;justify-content:center;overflow-y:auto;overscroll-behavior:contain}
+.sheet{background:var(--bg);width:min(1100px,100%);min-height:100%;display:flex;flex-direction:column}
+.bar{position:sticky;top:0;z-index:2;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:calc(14px + env(safe-area-inset-top,0px));padding-bottom:14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar h2{font-size:clamp(20px,3vw,26px)}
+.bar .label{display:block;margin-bottom:2px}
+.nav{display:flex;gap:8px;flex-shrink:0}
+.nav button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+.nav button.close{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.shots{display:flex;flex-direction:column;padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
+.shots img{display:block;width:100%;height:auto;background:var(--surface)}
+.shots.video{gap:24px;padding-top:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.note{margin:0;padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));color:var(--muted)}
+.shots.video .note{padding:0}
+.vbox{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:clamp(12px,3vw,32px);display:flex;justify-content:center}
+.vbox video{display:block;max-width:100%;max-height:78vh;height:auto;border-radius:4px}
+.cover{position:relative}
+.cover.fit img{object-fit:contain;padding:12px}
+.play{position:absolute;left:12px;bottom:12px;background:var(--ink);color:var(--bg);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:4px 10px}
+.end{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.end button{font:inherit;font-weight:600;background:none;border:0;color:var(--accent);cursor:pointer;padding:0}
+@media (prefers-reduced-motion:reduce){.cover img{transition:none}.proj:hover .cover img{transform:none}}
+@media (max-width:480px){.item{grid-template-columns:1fr;gap:2px}.nav .prev,.nav .next{display:none}}
+</style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="top"><span class="label" data-t="eyebrow">Portafolio · Santo Domingo, RD</span><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es" aria-pressed="true">ES</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div>
+    <h1>Paula<br><span>Peguero</span></h1>
+    <p class="lede" data-t="lede">Diseñadora y líder de equipo creativo. Hago branding, contenido para redes, ilustración y experiencia de producto, y organizo cómo se planifica y entrega el trabajo.</p>
+    <div class="chips">
+      <span class="chip">Team Lead &amp; Senior Designer</span>
+      <span class="chip" data-t="chipMaster">Máster en Marketing · UB</span>
+      <span class="chip" data-t="chipPM">Diplomado en Gestión de Proyectos</span>
+      <span class="chip">ES · EN</span>
+    </div>
+    <div class="brands" aria-labelledby="brandsLabel">
+      <span class="label" id="brandsLabel" data-t="brands">Marcas con las que he trabajado en Kargo</span>
+      <div class="marquee"><ul class="track"><li>Nike</li><li>Samsung</li><li>FOX</li><li>American Eagle</li><li>Quaker</li><li>Olay</li><li aria-hidden="true">Nike</li><li aria-hidden="true">Samsung</li><li aria-hidden="true">FOX</li><li aria-hidden="true">American Eagle</li><li aria-hidden="true">Quaker</li><li aria-hidden="true">Olay</li></ul></div>
+    </div>
+  </header>
+
+  <section aria-labelledby="proyectos">
+    <div class="head"><h2 id="proyectos" data-t="projects">Proyectos</h2><span class="label" data-t="tapHint">Toca un proyecto para verlo completo</span></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section aria-labelledby="trayectoria">
+    <div class="head"><h2 id="trayectoria" data-t="career">Trayectoria</h2></div>
+    <div class="cv">
+      <div>
+        <h3 data-t="experience">Experiencia</h3>
+        <div class="item"><span class="when" data-t="now">Actual</span><div><b>Team Lead &amp; Senior Designer</b><p data-t="kargo">Hire Horatio × Kargo. Lidero un equipo de diseñadores y entrego piezas de marketing para marcas internacionales.</p></div></div>
+        <div class="item"><span class="when" data-t="now">Actual</span><div><b data-t="ops">Operaciones</b><p data-t="opsD">Magik Dominicana. Lidero la reestructuración operativa de la agencia: diagnóstico financiero, plan por etapas y documentación de procesos.</p></div></div>
+        <div class="item"><span class="when" data-t="before">Antes</span><div><b>Social Media Manager</b><p data-t="smD">Magik Dominicana. Estrategia y contenido de redes para clientes de la agencia.</p></div></div>
+      </div>
+      <div>
+        <h3 data-t="education">Formación</h3>
+        <div class="item"><span class="when">2026</span><div><b data-t="master">Máster en Marketing Management, Branding y Entornos Digitales</b><p>Universitat de Barcelona</p></div></div>
+        <div class="item"><span class="when">—</span><div><b data-t="pmDip">Diplomado en Gestión de Proyectos</b><p>UNIBE</p></div></div>
+        <div class="item"><span class="when">—</span><div><b data-t="bach">Licenciatura en Comunicación Digital</b><p>Universidad APEC</p></div></div>
+        <div class="item"><span class="when" data-t="tools">Herram.</span><div><b>Figma, Illustrator, Photoshop, After Effects, Premiere, Adobe XD</b></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" aria-labelledby="contacto">
+    <span class="label" data-t="contact">Contacto</span>
+    <h2 id="contacto" data-t="talk">Hablemos.</h2>
+    <div class="mail"><code id="email">paulapeguero36@gmail.com</code><button id="copy" type="button" data-t="copy">Copiar correo</button></div>
+    <div class="links">
+      <a href="http://linkedin.com/in/paula-peguero-090b76224/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+</div>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-labelledby="vtitle">
+  <div class="sheet">
+    <div class="bar">
+      <div><span class="label" id="vtag"></span><h2 id="vtitle"></h2></div>
+      <div class="nav">
+        <button type="button" class="prev" id="prev" data-t="prev">← Anterior</button>
+        <button type="button" class="next" id="next" data-t="next">Siguiente →</button>
+        <button type="button" class="close" id="close" data-t="close">Cerrar</button>
+      </div>
+    </div>
+    <div class="shots" id="shots"></div>
+    <div class="end"><button type="button" id="back" data-t="back">← Volver a proyectos</button><button type="button" id="nextEnd" data-t="nextProj">Siguiente proyecto →</button></div>
+  </div>
+</div>
+
+<script>
+var T={
+es:{eyebrow:"Portafolio · Santo Domingo, RD",lede:"Diseñadora y líder de equipo creativo. Hago branding, contenido para redes, ilustración y experiencia de producto, y organizo cómo se planifica y entrega el trabajo.",chipMaster:"Máster en Marketing · UB",chipPM:"Diplomado en Gestión de Proyectos",brands:"Marcas con las que he trabajado en Kargo",projects:"Proyectos",tapHint:"Toca un proyecto para verlo completo",career:"Trayectoria",experience:"Experiencia",now:"Actual",before:"Antes",kargo:"Hire Horatio × Kargo. Lidero un equipo de diseñadores y entrego piezas de marketing para marcas internacionales.",ops:"Operaciones",opsD:"Magik Dominicana. Lidero la reestructuración operativa de la agencia: diagnóstico financiero, plan por etapas y documentación de procesos.",smD:"Magik Dominicana. Estrategia y contenido de redes para clientes de la agencia.",education:"Formación",master:"Máster en Marketing Management, Branding y Entornos Digitales",pmDip:"Diplomado en Gestión de Proyectos",bach:"Licenciatura en Comunicación Digital",tools:"Herram.",contact:"Contacto",talk:"Hablemos.",copy:"Copiar correo",copied:"Copiado",prev:"← Anterior",next:"Siguiente →",close:"Cerrar",back:"← Volver a proyectos",nextProj:"Siguiente proyecto →",view:"Ver proyecto →",video:"▶ Video",image:"imagen"},
+en:{eyebrow:"Portfolio · Santo Domingo, DR",lede:"Designer and creative team lead. I work on branding, social content, illustration and product experience, and I organize how work gets planned and delivered.",chipMaster:"MSc in Marketing · UB",chipPM:"Project Management Diploma",brands:"Brands I've worked with at Kargo",projects:"Projects",tapHint:"Tap a project to see it in full",career:"Background",experience:"Experience",now:"Current",before:"Previous",kargo:"Hire Horatio × Kargo. I lead a team of designers and deliver marketing work for international brands.",ops:"Operations",opsD:"Magik Dominicana. I lead the agency's operational turnaround: financial diagnosis, a staged plan and process documentation.",smD:"Magik Dominicana. Social media strategy and content for the agency's clients.",education:"Education",master:"MSc in Marketing Management, Branding and Digital Environments",pmDip:"Diploma in Project Management",bach:"BA in Digital Communication",tools:"Tools",contact:"Contact",talk:"Let's talk.",copy:"Copy email",copied:"Copied",prev:"← Previous",next:"Next →",close:"Close",back:"← Back to projects",nextProj:"Next project →",view:"View project →",video:"▶ Video",image:"image"}};
+function imgs(id,n){var a=[];for(var k=1;k<=n;k++)a.push(''+id+'_'+String(k).padStart(2,'0')+'.jpg');return a}
+function vids(ns){return ns.map(function(n){return 'ad_'+String(n).padStart(2,'0')+'.mp4'})}
+var P=[
+ {id:"wilson",tag:{es:"Ad tech · Kargo",en:"Ad tech · Kargo"},title:{es:"Wilson Rush Pro 4.5",en:"Wilson Rush Pro 4.5"},note:{es:"Banners animados y formato expandible en móvil.",en:"Animated banners and an expandable mobile format."},cover:"ad_05.jpg",fit:1,items:vids([4,5,6,7,8,9])},
+ {id:"drpepper",tag:{es:"Ad tech · Kargo",en:"Ad tech · Kargo"},title:{es:"Dr Pepper",en:"Dr Pepper"},note:{es:"Anuncios display animados en formato vertical y horizontal.",en:"Animated display ads in vertical and horizontal formats."},cover:"ad_03.jpg",fit:1,items:vids([2,3])},
+ {id:"hiddenvalley",tag:{es:"Ad tech · Kargo",en:"Ad tech · Kargo"},title:{es:"Hidden Valley Ranch",en:"Hidden Valley Ranch"},note:{es:"Pre-roll en video.",en:"Video pre-roll."},cover:"ad_01.jpg",items:vids([1])},
+ {id:"agende",tag:{es:"UX/UI · Caso de estudio",en:"UX/UI · Case study"},title:{es:"Agende: app de calendario y tareas",en:"Agende: calendar and to-do app"},cover:"agende_01.jpg",items:imgs("agende",8)},
+ {id:"yasai",tag:{es:"Branding",en:"Branding"},title:{es:"YASAI: restaurante de sushi vegetariano",en:"YASAI: vegetarian sushi restaurant"},cover:"yasai_01.jpg",items:imgs("yasai",4)},
+ {id:"palsitio",tag:{es:"Branding",en:"Branding"},title:{es:"PAL SITIO Bar",en:"PAL SITIO Bar"},cover:"palsitio_05.jpg",items:imgs("palsitio",6)},
+ {id:"social",tag:{es:"Redes sociales",en:"Social media"},title:{es:"Contenido para redes sociales",en:"Social media content"},cover:"social_02.jpg",items:imgs("social",3)},
+ {id:"elephant",tag:{es:"Ilustración editorial",en:"Editorial illustration"},title:{es:"The elephant's poet kid",en:"The elephant's poet kid"},cover:"elephant_04.jpg",items:imgs("elephant",4)}
+];
+var L='es',grid=document.getElementById('grid'),viewer=document.getElementById('viewer'),shots=document.getElementById('shots'),cur=-1,lastFocus=null;
+function isVid(p){return p.items[0].indexOf('.mp4')>0}
+function renderGrid(){
+  grid.innerHTML='';
+  P.forEach(function(p,i){
+    var b=document.createElement('button');b.className='proj';b.type='button';
+    b.innerHTML='<div class="cover'+(p.fit?' fit':'')+'"><img src="'+p.cover+'" alt="'+p.title[L]+'" loading="'+(i<3?'eager':'lazy')+'">'+(isVid(p)?'<span class="play">'+T[L].video+'</span>':'')+'</div><h3>'+p.title[L]+'</h3><div class="meta"><span>'+p.tag[L]+'</span><span class="go">'+T[L].view+'</span></div>';
+    b.addEventListener('click',function(){open(i)});grid.appendChild(b);
+  });
+}
+function setLang(l){
+  L=l;document.documentElement.lang=l;
+  document.querySelectorAll('[data-t]').forEach(function(el){el.textContent=T[l][el.getAttribute('data-t')]});
+  document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lang')===l?'true':'false')});
+  renderGrid();
+  if(cur>=0){var p=P[cur];document.getElementById('vtag').textContent=p.tag[L];document.getElementById('vtitle').textContent=p.title[L];var n=shots.querySelector('.note');if(n&&p.note)n.textContent=p.note[L]}
+  try{localStorage.setItem('lang',l)}catch(e){}
+}
+document.querySelectorAll('[data-lang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-lang'))})});
+function open(i){
+  if(cur<0)lastFocus=document.activeElement;
+  cur=i;var p=P[i];
+  document.getElementById('vtag').textContent=p.tag[L];document.getElementById('vtitle').textContent=p.title[L];
+  var h=p.note?'<p class="note">'+p.note[L]+'</p>':'';
+  p.items.forEach(function(f,k){
+    if(f.indexOf('.mp4')>0)h+='<div class="vbox"><video src="'+f+'" poster="'+f.replace('.mp4','.jpg')+'" controls muted autoplay loop playsinline preload="metadata"></video></div>';
+    else h+='<img src="'+f+'" alt="'+p.title[L]+', '+T[L].image+' '+(k+1)+'" loading="'+(k<2?'eager':'lazy')+'">';
+  });
+  shots.innerHTML=h;shots.className='shots'+(isVid(p)?' video':'');viewer.hidden=false;viewer.scrollTop=0;document.body.classList.add('locked');
+  document.getElementById('close').focus();
+}
+function close(){viewer.hidden=true;shots.innerHTML='';document.body.classList.remove('locked');cur=-1;if(lastFocus)lastFocus.focus()}
+function step(d){open((cur+d+P.length)%P.length)}
+document.getElementById('close').onclick=close;document.getElementById('back').onclick=close;
+document.getElementById('next').onclick=function(){step(1)};document.getElementById('nextEnd').onclick=function(){step(1)};
+document.getElementById('prev').onclick=function(){step(-1)};
+viewer.addEventListener('click',function(e){if(e.target===viewer)close()});
+document.addEventListener('keydown',function(e){if(cur<0)return;if(e.key==='Escape')close();if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
+var hash=(location.hash||'').slice(1),start='es';
+if(hash==='en'||hash==='es')start=hash;else{try{var s=localStorage.getItem('lang');if(s==='en'||s==='es')start=s}catch(e){}}
+setLang(start);
+document.getElementById('copy').addEventListener('click',function(){
+  var b=this,t=document.getElementById('email').textContent;
+  function done(){b.textContent=T[L].copied;setTimeout(function(){b.textContent=T[L].copy},1800)}
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('email'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  try{navigator.clipboard.writeText(t).then(done,sel)}catch(e){sel()}
+});
+</script>
+
+</body>
+</html>
